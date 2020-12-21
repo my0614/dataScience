@@ -4,6 +4,7 @@ import re
 from collections import Counter
 
 
+#자신이 원하는 페이지링크
 source = requests.get("https://ko.wikipedia.org/wiki/%ED%8C%8C%EC%9D%B4%EC%8D%AC")
 soup = BeautifulSoup(source.content, "html.parser")
 

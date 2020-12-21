@@ -1,10 +1,5 @@
-'''
-filter 사용하기
-
-'''
-import numpy as numpy
-
-arr = numpy.array([5,8,9,6,3])
-
-filter = numpy.where(arr > 5)
-print(arr[filter])
+import re
+mo = re.match(r"\d+", "067 Starts with a number")
+mo2 = re.match(r"\d+" , "hello world")
+print(mo)
+print(mo2)
