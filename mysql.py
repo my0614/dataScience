@@ -9,11 +9,17 @@ my_db = pymysql.connect(
     charset='utf8'
 )
 
+
 #cursor객체 생성
 cursor = my_db.cursor(pymysql.cursors.DictCursor) #딕셔너리형태로 반환
-
 sql = "SELECT * FROM info;" # Info table 찾기
 cursor.execute(sql)
+cursor.fetchall()
+
+sql_in = "insert into test.info(id,number,password,age)VALUES(%s,%s, %s,%s);"
+cursor.execute(sql_in, (69,1234, 'min',44)) # primary 값은 중복값이 안된다.
 result = cursor.fetchall()
-show = pd.DataFrame(result)
-print(show)
+
+my_db.commit() #데이터베이스 저장
+df = pd.DataFrame(result)
+print(df)
