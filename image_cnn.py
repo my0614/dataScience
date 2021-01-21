@@ -3,6 +3,7 @@ import torchvision.datasets as dsets
 import torchvision.transforms as transforms
 import torch.nn.init
 
+
 inputs = torch.Tensor(1, 1, 28, 28)
 print('텐서의 크기 : {}'.format(inputs.shape))
 conv1 = nn.Conv2d(1, 32, 3, padding=1)
@@ -115,7 +116,8 @@ for epoch in range(training_epochs):
     print('[Epoch: {:>4}] cost = {:>.9}'.format(epoch + 1, avg_cost))
     
 
-        
+          
+          
 print('모델 훈련 완료!!')
 # 학습을 진행하지 않을 것이므로 torch.no_grad()
 with torch.no_grad():
