@@ -10,15 +10,12 @@ input_ = input() # 이미지 파일 입력
 start = time.time()
 a = cv2.imread(input_)
 qimg = cv2.resize(a,(300,300))
-
 res1, res2 = None, None
 
 #sift 연산
 sift = cv2.xfeatures2d.SIFT_create()
 
 kp1,des1 = sift.detectAndCompute(qimg,None)
-
-
 FLANN_INDEX_KDTREE = 0
 index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
 search_params = dict(checks= 50)
@@ -40,7 +37,7 @@ for pack in os.walk('C:/Users/damons/Desktop/workspace/Datamonsters/image/fasion
         x +=1
 print('file count = ',x)
 for i in range(1,x+1):
-    index = str(i)
+    index = int(i)
     b = cv2.imread('./image/fasion/fasion_%d.jpg' % cnt)
     cnt +=1
     timg = cv2.resize(b,(300, 300))
@@ -62,6 +59,8 @@ for i in range(1,x+1):
     count = 0 # 카운트 초기화
     draw_params = dict(matchColor = (255,0,139),singlePointColor = (255,0,139), matchesMask = matchesMask, flags = 0)
     res1 = cv2.drawMatchesKnn(qimg, kp1, timg, kp2, matches1, res1,  **draw_params)
+    #plt.imshow(res1)
+    #plt.show()
 
 
 print(sorted(result, reverse = True))
@@ -69,12 +68,13 @@ print(sorted(result, reverse = True))
 print(time.time() - start)
 
 
+kidx = 0
 for idx in range(0,5):
     print(sorted(result, reverse = True)[idx])
-    #fileName = r'C:/Users/damons/Desktop/workspace/Datamonsters/image/fasion/fasion_%d.jpg' % sorted(img_dict.items(), key=lambda x: x[1], reverse=True).get()
-    #ndarray = img.imread(fileName)
-    #plt.imshow(ndarray)
-    #plt.show()
-
-
-
+    for key, value in img_dict.items():
+        if sorted(result, reverse = True)[idx] == value:
+            kidx = key
+            fileName = r'C:/Users/damons/Desktop/workspace/Datamonsters/image/fasion/fasion_%d.jpg' % int(kidx)
+            ndarray = img.imread(fileName)
+            plt.imshow(ndarray)
+            plt.show()
