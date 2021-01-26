@@ -65,7 +65,7 @@ for i in range(1,x+1):
 
 print(sorted(result, reverse = True))
 #가장 비슷한 사진 5장 찾기
-print(time.time() - start)
+
 
 
 kidx = 0
@@ -73,8 +73,14 @@ for idx in range(0,5):
     print(sorted(result, reverse = True)[idx])
     for key, value in img_dict.items():
         if sorted(result, reverse = True)[idx] == value:
+            print(time.time() - start)
             kidx = key
             fileName = r'C:/Users/damons/Desktop/workspace/Datamonsters/image/fasion/fasion_%d.jpg' % int(kidx)
             ndarray = img.imread(fileName)
-            plt.imshow(ndarray)
+            re_img = cv2.resize(ndarray,(300,300))
+            print("ndarray = {0}".format(re_img.shape))
+            print("qimg = {0}".format(qimg.shape))
+            hstack_img = np.hstack((qimg, re_img))
+            print("hstack_img.shape = {0}".format(hstack_img.shape))
+            plt.imshow(hstack_img)
             plt.show()
