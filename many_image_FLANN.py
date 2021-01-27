@@ -47,7 +47,7 @@ for i in range(1,x+1):
     matchesMask = [[0,0] for i in range(len(matches1))]
 
     for i,(m,n) in enumerate(matches1):
-        if m.distance <0.89*n.distance: #ratio 정확도
+        if m.distance <0.90*n.distance: #ratio 정확도
             matchesMask[i] = [1.0]
             count += 1
 
@@ -67,7 +67,7 @@ print(sorted(result, reverse = True))
 #가장 비슷한 사진 5장 찾기
 
 
-
+h_list = []
 kidx = 0
 for idx in range(0,5):
     print(sorted(result, reverse = True)[idx])
@@ -80,7 +80,11 @@ for idx in range(0,5):
             re_img = cv2.resize(ndarray,(300,300))
             print("ndarray = {0}".format(re_img.shape))
             print("qimg = {0}".format(qimg.shape))
-            hstack_img = np.hstack((qimg, re_img))
-            print("hstack_img.shape = {0}".format(hstack_img.shape))
-            plt.imshow(hstack_img)
-            plt.show()
+            #print(re_img)
+            h_list.append(re_img)
+            
+
+hstack_img = np.hstack((qimg, h_list[0],h_list[1],h_list[2],h_list[3],h_list[4]))
+print("hstack_img.shape = {0}".format(hstack_img.shape))
+plt.imshow(hstack_img)
+plt.show()
