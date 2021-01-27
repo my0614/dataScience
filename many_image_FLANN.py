@@ -49,10 +49,10 @@ index_max = 0
 
 # 원하는 디렉토리의 파일의 개수 가져오기
 
-x = file_cnt('C:/Users/damons/Desktop/workspace/Datamonsters/image/fasion/')
+x = file_cnt('C:/Users/damons/Desktop/img/Abstract_Mosaic_Racerback_Dress')
 for i in range(1,x+1):
     index = int(i)
-    timg = make_img('./image/fasion/fasion_%d.jpg' % cnt)
+    timg = make_img('C:/Users/damons/Desktop/img/Abstract_Mosaic_Racerback_Dress/img_%08d.jpg' % cnt)
     cnt += 1
     kp2,des2 = sift.detectAndCompute(timg,None)
 
@@ -61,7 +61,7 @@ for i in range(1,x+1):
     matchesMask = [[0,0] for i in range(len(matches1))]
 
     for i,(m,n) in enumerate(matches1):
-        if m.distance <0.90*n.distance: #ratio 정확도
+        if m.distance <0.89*n.distance: #ratio 정확도
             matchesMask[i] = [1.0]
             count += 1
     img_add[index] = count # 딕셔너리로 쉽게 비슷한 이미지 찾기
@@ -71,23 +71,29 @@ for i in range(1,x+1):
     count = 0 # 카운트 초기화
     draw_params = dict(matchColor = (255,0,139),singlePointColor = (255,0,139), matchesMask = matchesMask, flags = 0)
     res1 = cv2.drawMatchesKnn(qimg, kp1, timg, kp2, matches1, res1,  **draw_params)
+    #plt.imshow(res1)
+    #plt.show()
 
 
 h_list = []
 kidx = 0
+set_list = set(result)
+result = list(set_list)
+
 for idx in range(0,5):
     print(sorted(result, reverse = True)[idx])
     for key, value in img_dict.items():
         if sorted(result, reverse = True)[idx] == value:
-            print(time.time() - start)
             kidx = key
-            fileName = r'C:/Users/damons/Desktop/workspace/Datamonsters/image/fasion/fasion_%d.jpg' % int(kidx)
+            fileName = r'C:/Users/damons/Desktop/img/Abstract_Mosaic_Racerback_Dress/img_%08d.jpg' % int(kidx)
             re_img = make_img(fileName)
-            constant = cv2.copyMakeBorder(re_img, pixel, pixel, pixel, pixel, cv2.BORDER_CONSTANT, value=COLOR)
+            constant = cv2.copyMakeBorder(re_img, pixel, pixel, pixel, 7, cv2.BORDER_CONSTANT, value=COLOR) # src, top,bottom, left,right
+            
             h_list.append(constant)
 
 
 hstack_img = np.hstack((qimg, h_list[0],h_list[1],h_list[2],h_list[3],h_list[4])) # 유사한 이미지 5개한번에 출력
+print(time.time() - start)
 cv2.imwrite("copy.jpg", hstack_img);
 plt.imshow(hstack_img)
 plt.show()
