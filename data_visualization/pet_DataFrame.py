@@ -6,6 +6,11 @@ next(data) # header 없애기
 divide = []
 result = []
 table = {}
+
+def find_key(val):
+    for key,value in table.items():
+        if val == value:
+            return key
 for row in data:
     result.append(row)
     divide.append(row[2])
@@ -23,4 +28,7 @@ for i in divide:
     to = df['등록동물수'].sum() # 원하는 행 합 구하기
     table[i] = to
 
-table
+print(table)
+# 결과 출력
+print('등록동물수가 가장 많은 행정동은',find_key(max(table.values())),':',max(table.values()))
+print('등록동물수가 가장 적은 행정동은',find_key(min(table.values())),':',min(table.values()))
