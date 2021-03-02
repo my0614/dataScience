@@ -25,5 +25,11 @@ for i in range(15):
     cnt += 1
 
 del_dic('0')
-print(info_re)
-
+info = {} # info 초기화
+df = df[(df['brand'] == 'Dell') & (df['os'] == 'linux')]
+for i in info_re.items():
+    info[i[0]] = i[1]
+    #df1  = df[i[0]] == i[1]
+print(info)
+    
+    
