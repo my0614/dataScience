@@ -1,17 +1,22 @@
 from bs4 import BeautifulSoup
 import requests
+import pandas as pd
+#5페이지만
+movie = []
+for page in range(1,6):
+    source = requests.get("https://movie.naver.com/movie/point/af/list.nhn?&page=%d" % page).text
+    soup = BeautifulSoup(source, "html.parser")
+    hotkeys = soup.select("a.movie.color_b") #class가지고 오기
+    for i in hotkeys:
+        movie.append(i.text)
 
-page_url = 'https://news.daum.net/breakingnews/digital'
-page_response = requests.get(page_url)
-page_soup = BeautifulSoup(page_response.text)
-print(page_soup)
-select = page_soup.select('.link_txt')
-articles = []
-#단어 찾기
-for link in select:
-    article_text = link[0].text
-    print(article_text)
-    articles.append(article_text.strip().replace('\n', ' '))
-print(articles)
+title = {}
+df = pd.DataFrame(movie)
+a = df.value_counts() # 영화댓글순위
+for i in a.items():
+    title[str(i[0]).replace(',','').replace("'",'').replace('(','').replace(')','')] = i[1]
+
+print(title)
+
 
 
