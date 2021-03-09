@@ -5,7 +5,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Flatten, Dense
 
 (x_train, y_train), (x_test,y_test) = mnist.load_data()
-x_train, x_test = x_train * 255.0, x_test/255.0
+x_train, x_test = x_train / 255.0, x_test/255.0
 
 ds = tf.data.Dataset.from_tensor_slices((x_train,y_train)).shuffle(10000)
 train_size = int(len(x_train)*0.7) #학습셋:검증셋 비율
