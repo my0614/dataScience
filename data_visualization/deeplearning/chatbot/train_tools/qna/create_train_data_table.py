@@ -1,5 +1,5 @@
 import pymysql
-from config.DatabaseConfig import *
+from test import *
 print('hello')
 db = None
 try:
@@ -18,7 +18,7 @@ try:
     ENGINE = InnoDB DEFAULT CHARSET = utf8
     '''
     with db.cursor()as cursor:
-        coursor.execute(sql)
+        cursor.execute(sql)
 except Exception as e:
     print(e)
 finally:
