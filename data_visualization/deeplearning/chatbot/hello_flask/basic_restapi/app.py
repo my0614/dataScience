@@ -13,9 +13,10 @@ def get_user(user_id):
 
 @app.route('/user', methods = ['POST'])
 def add_user():
+    print('hello')
     user = request.get_json()
     resource.append(user)
     return jsonify(resource)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port = '4040')
