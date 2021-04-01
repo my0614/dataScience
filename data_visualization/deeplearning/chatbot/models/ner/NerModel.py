@@ -1,12 +1,12 @@
-    import tensorflow as tf
+import tensorflow as tf
     import numpy as np
     from tensorflow.ketas import preprocessing
 
     class NerModel:
-        def __init__(self, model_name, proprocess):
+        def __init__(self, model_name1, proprocess):
             self.index_to_ner ={1:'0',2:'B_DT',3:'B_FOOD',4:'I',5:'B_OG',6:'B_PS',7:'B_LC',8:'NNp', 9:'B_TI', 0:'PAD'}
 
-            self.model = load_model(model_name)
+            self.model = load_model(model_name1)
             self.p = proprocess
         def predict(self, query):
             pos = self.p.pos(query)

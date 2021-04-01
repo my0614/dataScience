@@ -13,7 +13,7 @@ class Database:
     def connect(self):
         if self.conn != None:
             return
-        self.conn - pymysql.conncet(
+        self.conn = pymysql.connect(
             host= self.host,
             user = self.user,
             password  = self.password,

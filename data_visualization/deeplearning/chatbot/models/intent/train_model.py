@@ -104,7 +104,7 @@ dropout_emb = Dropout(rate= dropout_prob)(embedding_layer)
 conv1 = Conv1D(filters = 128, kernel_size =3, padding = 'valid',activation = tf.nn.relu)(dropout_emb)
 pool1 = GlobalMaxPool1D()(conv1)
 
-conv2 = Conv1D(filters = 128, kernel_size =5, padding = 'valid',activation = tf.nn.relu)(dropout_emb)
+conv2 = Conv1D(filters = 128, kernel_size =4, padding = 'valid',activation = tf.nn.relu)(dropout_emb)
 pool2 = GlobalMaxPool1D()(conv2)
 
 conv3 = Conv1D(filters = 128, kernel_size =5, padding = 'valid',activation = tf.nn.relu)(dropout_emb)
@@ -127,3 +127,4 @@ print('loss : %f' %(loss))
 
 model.save('intent_model.h5')
 print('finish')
+

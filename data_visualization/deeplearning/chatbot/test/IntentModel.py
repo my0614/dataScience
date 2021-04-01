@@ -1,12 +1,12 @@
 import tensorflow as tf
-
+import numpy as np
 from tensorflow.keras import preprocessing
-from tensorflow,keras import Model, load_model
+from tensorflow.keras.models import Model, load_model
 
 class IntentModel:
-    def __init__(self, model_name1, proprocess):
+    def __init__(self, model_name, proprocess):
         self.labels= {0:"인사",1:"욕설",2:"주문",3:"예약",4:"기타"} #의도분류딕셔너리
-        self.model = load_model(model_name1)
+        self.model = load_model(model_name)
 
         self.p = proprocess
 

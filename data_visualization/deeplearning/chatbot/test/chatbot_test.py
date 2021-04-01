@@ -6,7 +6,7 @@ p = Preprocess(word2index_dic = '../train_tools/dict/chatbot_dict.bin', userdic=
 
 db = Database(host = DB_HOST, user= DB_USER, password = DB_PASSWORD, db_name = DB_NAME)
 db.connect()
-query = "오전에 라면 10개 주문합니다"
+query = "오늘 오전에 짬뽕 주문합니다"
 
 from IntentModel import IntentModel
 intent = IntentModel(model_name = '../models/intent/intent_model.h5', proprocess = p)

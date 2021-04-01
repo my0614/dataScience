@@ -2,9 +2,10 @@ import socket
 
 class BotServer:
     def __init__(self, srv_port, listen_num):
-        self.port = srv_port
-        self.listen = listen_num
+        self.port = srv_port # 사용할 포트 
+        self.listen = listen_num # 연결 수락
         self.mySock = None
+        
     def create_sock(self):
         self.mySock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.mySock.bind(("0.0.0.0", int(self.port))) #결합
