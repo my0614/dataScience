@@ -1,3 +1,4 @@
+
 import pandas as pd
 import csv
 import matplotlib.pyplot as plt
@@ -23,10 +24,10 @@ for law in data:
     S.append(law[4:5][0])
 
 plt.figure(figsize=(10,5))
-plt.title('총기층횟수 빈도', FontProperties = fontprop)
+plt.title('총 기증횟수 빈도', FontProperties = fontprop)
 ax = plt.gca()
+ax.axes.title.set_size(20)
 #ax.axes.xaxis.set_visible(False)
 ax.axes.yaxis.set_visible(False)
-plt.Xlabel()
 plt.hist(F)
 
